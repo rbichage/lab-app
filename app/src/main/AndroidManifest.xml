@@ -12,13 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".models.Projector"
-            android:label="@string/title_activity_projector"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activities.BookedResourcesActivity"></activity>
         <activity android:name=".activities.ComputerListActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.HomeActivity" />
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

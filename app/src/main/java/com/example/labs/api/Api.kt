@@ -6,6 +6,7 @@ import com.example.labs.models.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -13,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface Api {
     companion object {
@@ -78,12 +80,28 @@ interface Api {
     @POST("oauth/token")
     fun login(@Body login: Login): Call<AccessToken>
 
-    @GET("api/resources/")
-    fun getComputers(): Call<List<Computer>>
+    @GET("api/{resourceType}/")
+    fun getComputers(@Path("resourceType") resourceType: String): Call<List<Computer>>
 
     @GET("api/labs")
     fun getLabs(): Call<List<Lab>>
 
     @GET("api/user")
     fun getUser(): Call<User>
+
+    @POST("api/book-resource")
+    fun bookResource(
+            //TODO: insert Body
+    ): Call<ResponseBody>
+
+    @GET("api/booked-resources")
+    fun getBookedResources(): Call<ResponseBody>
+
+    @POST("api/book-lab")
+    fun bookLab(
+            //TODO: Insert Body here
+    ): Call<ResponseBody>
+
+    @GET("api/booked-labs")
+    fun getBookedLabs(): Call<ResponseBody>
 }

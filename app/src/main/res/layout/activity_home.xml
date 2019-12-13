@@ -4,8 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
-    
+    tools:context=".activities.HomeActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Home"
+        app:menu="@menu/toolbar_menu"
+        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+        />
+
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bComputers"
         android:layout_width="200dp"
@@ -77,6 +90,7 @@
         app:srcCompat="@drawable/ic_baseline_power_settings_new_24"
         android:background="@android:color/transparent"
         android:elevation="8dp"
+        android:visibility="gone"
         />
 
 

@@ -1,19 +1,21 @@
-package com.example.labs
+package com.example.labs.activities
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import com.example.labs.activities.ComputerListActivity
+import com.example.labs.R
 import com.example.labs.api.Api
 import com.example.labs.models.User
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_home.*
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
 
 class HomeActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,13 +27,15 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         bLabs.setOnClickListener(this)
         bProjectors.setOnClickListener(this)
 
-        imageButton.setOnClickListener{
-            getSharedPreferences("Shared_pref", Context.MODE_PRIVATE).edit().clear().apply()
+        setSupportActionBar(toolbar)
 
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-        }
+//        imageButton.setOnClickListener{
+//            getSharedPreferences("Shared_pref", Context.MODE_PRIVATE).edit().clear().apply()
+//
+//            val intent = Intent(this, MainActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+//            startActivity(intent)
+//        }
 
         checkUserType()
     }
@@ -82,6 +86,32 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
                 })
 
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        when(item?.itemId){
+            R.id.menu_booked_resources -> {
+                startActivity(Intent(this, BookedResourcesActivity::class.java))
+            }
+
+            R.id.menu_logout -> {
+                getSharedPreferences("Shared_pref", Context.MODE_PRIVATE).edit().clear().apply()
+
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
 
     override fun onClick(p0: View?) {
         val intent = Intent(this, ComputerListActivity::class.java)

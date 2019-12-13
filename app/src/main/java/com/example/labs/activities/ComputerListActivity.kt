@@ -66,41 +66,51 @@ class ComputerListActivity : AppCompatActivity() {
     }
 
     private fun getLabResources() {
+        when (resourceType) {
+            "computer" -> {
+                requestLbResources("computers")
+            }
+
+            "lcd" -> {
+                requestLbResources("lcd")
+
+            }
+
+            "projector" -> {
+                requestLbResources("projectors")
+
+            }
+        }
+
+    }
+
+
+    private fun requestLbResources(type: String) {
         nextRequest((this))
-                .getComputers()
+                .getComputers(type)
                 .enqueue(object : Callback<List<Computer>> {
                     override fun onResponse(call: Call<List<Computer>>, response: Response<List<Computer>>) {
                         computerList = response.body()!!.toMutableList()
-
-                        val computersOnly = computerList.filter { it.resourceType == "Computer" }
-                        val projectorsOnly = computerList.filter { it.resourceType == "Projector" }
-                        Log.e("PROJECTOR", projectorsOnly.size.toString())
-
-                        val lcdOnly = computerList.filter {
-                            it.resourceType == "lcd"
-                        }
 
                         val layoutManager = LinearLayoutManager(this@ComputerListActivity)
                         recycler.layoutManager = layoutManager
                         recycler.addItemDecoration(DividerItemDecoration(this@ComputerListActivity, layoutManager.orientation))
                         recycler.hasFixedSize()
 
-                        when (resourceType) {
-                            "computer" -> {
+                        when (type) {
+                            "computers" -> {
                                 toolbar.title = "Computers"
-
-                                recycler.adapter = ComputerListAdapter(this@ComputerListActivity, computersOnly.toMutableList(), "computer")
+                                recycler.adapter = ComputerListAdapter(this@ComputerListActivity, computerList, "computer")
                             }
 
                             "lcd" -> {
                                 toolbar.title = "LCDs"
-                                recycler.adapter = ComputerListAdapter(this@ComputerListActivity, lcdOnly.toMutableList(), "lcd")
+                                recycler.adapter = ComputerListAdapter(this@ComputerListActivity, computerList, "lcd")
                             }
 
-                            "projector" -> {
+                            "projectors" -> {
                                 toolbar.title = "Projectors"
-
-                                recycler.adapter = ComputerListAdapter(this@ComputerListActivity, projectorsOnly.toMutableList(), "projector")
+                                recycler.adapter = ComputerListAdapter(this@ComputerListActivity, computerList, "projector")
                             }
                         }
                     }
