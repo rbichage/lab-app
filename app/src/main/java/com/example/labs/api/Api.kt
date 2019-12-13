@@ -90,18 +90,14 @@ interface Api {
     fun getUser(): Call<User>
 
     @POST("api/book-resource")
-    fun bookResource(
-            //TODO: insert Body
-    ): Call<ResponseBody>
+    fun bookResource(@Body bookResource: BookResource): Call<ResponseBody>
 
-    @GET("api/booked-resources")
-    fun getBookedResources(): Call<ResponseBody>
+    @GET("api/user-resources/{user_id}")
+    fun getBookedResources(@Path("user_id") userId: Int): Call<List<Resource>>
 
     @POST("api/book-lab")
-    fun bookLab(
-            //TODO: Insert Body here
-    ): Call<ResponseBody>
+    fun bookLab(@Body bookLab: BookLab): Call<ResponseBody>
 
-    @GET("api/booked-labs")
-    fun getBookedLabs(): Call<ResponseBody>
+    @GET("api/user-labs/{user_id}")
+    fun getBookedLabs(@Path("user_id") userId: Int): Call<List<Lab>>
 }

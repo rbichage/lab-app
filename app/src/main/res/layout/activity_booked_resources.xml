@@ -25,37 +25,24 @@
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         app:checkedChip="@id/computersChip"
         app:chipSpacing="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:selectionRequired="true"
         app:singleSelection="true"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        tools:layout_editor_absoluteX="16dp">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/computersChip"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Computers" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/projectorsChip"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Projectors" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/lcdChip"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="LCDs" />
+            android:text="Resources" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/labsChip"
@@ -64,12 +51,24 @@
             android:layout_height="wrap_content"
             android:text="Labs" />
 
+
     </com.google.android.material.chip.ChipGroup>
 
     <View
+        android:id="@+id/view1"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginTop="16dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@id/chipGroup" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintTop_toBottomOf="@id/view1" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
