@@ -9,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.edit
 import com.example.labs.R
 import com.example.labs.api.Api
 import com.example.labs.models.User
@@ -68,6 +69,11 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
                                     bLCD.visibility = View.VISIBLE
                                     bLabs.visibility = View.VISIBLE
                                     bProjectors.visibility = View.VISIBLE
+                                }
+
+                                getSharedPreferences("Shared_pref", Context.MODE_PRIVATE).edit {
+                                    this.putInt("user_id", response.body()!!.id)
+                                    this.apply()
                                 }
                             }
 

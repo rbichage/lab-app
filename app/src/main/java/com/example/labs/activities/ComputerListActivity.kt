@@ -1,7 +1,7 @@
 package com.example.labs.activities
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -54,7 +54,7 @@ class ComputerListActivity : AppCompatActivity() {
                         val layoutManager = LinearLayoutManager(this@ComputerListActivity)
                         recycler.layoutManager = layoutManager
                         recycler.addItemDecoration(DividerItemDecoration(this@ComputerListActivity, layoutManager.orientation))
-                        recycler.adapter = LabsAdapter(this@ComputerListActivity, labs)
+                        recycler.adapter = LabsAdapter(this@ComputerListActivity, labs, "booking")
                         recycler.hasFixedSize()
 
                     }
@@ -100,17 +100,17 @@ class ComputerListActivity : AppCompatActivity() {
                         when (type) {
                             "computers" -> {
                                 toolbar.title = "Computers"
-                                recycler.adapter = ComputerListAdapter(this@ComputerListActivity, computerList, "computer")
+                                recycler.adapter = ComputerListAdapter(this@ComputerListActivity, computerList, "")
                             }
 
                             "lcd" -> {
                                 toolbar.title = "LCDs"
-                                recycler.adapter = ComputerListAdapter(this@ComputerListActivity, computerList, "lcd")
+                                recycler.adapter = ComputerListAdapter(this@ComputerListActivity, computerList, "")
                             }
 
                             "projectors" -> {
                                 toolbar.title = "Projectors"
-                                recycler.adapter = ComputerListAdapter(this@ComputerListActivity, computerList, "projector")
+                                recycler.adapter = ComputerListAdapter(this@ComputerListActivity, computerList, "")
                             }
                         }
                     }
