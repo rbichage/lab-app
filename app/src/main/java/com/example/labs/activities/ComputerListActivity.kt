@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.labs.R
 import com.example.labs.adapters.ComputerListAdapter
 import com.example.labs.adapters.LabsAdapter
-import com.example.labs.api.Api
+import com.example.labs.api.Api.Companion.nextRequest
 import com.example.labs.models.Computer
 import com.example.labs.models.Lab
 import kotlinx.android.synthetic.main.activity_computer_list.*
@@ -45,7 +45,7 @@ class ComputerListActivity : AppCompatActivity() {
     }
 
     private fun getLabs() {
-        Api.nextRequest(this)
+        nextRequest(this)
                 .getLabs()
                 .enqueue(object : Callback<List<Lab>> {
                     override fun onResponse(call: Call<List<Lab>>, response: Response<List<Lab>>) {
@@ -66,7 +66,7 @@ class ComputerListActivity : AppCompatActivity() {
     }
 
     private fun getLabResources() {
-        Api.nextRequest((this))
+        nextRequest((this))
                 .getComputers()
                 .enqueue(object : Callback<List<Computer>> {
                     override fun onResponse(call: Call<List<Computer>>, response: Response<List<Computer>>) {
@@ -75,8 +75,10 @@ class ComputerListActivity : AppCompatActivity() {
                         val computersOnly = computerList.filter { it.resourceType == "Computer" }
                         val projectorsOnly = computerList.filter { it.resourceType == "Projector" }
                         Log.e("PROJECTOR", projectorsOnly.size.toString())
-                        val lcdOnly = computerList.filter { it.resourceType == "Smart Board" }
-                        val labsOnly = computerList.filter { it.resourceType == "lab" }
+
+                        val lcdOnly = computerList.filter {
+                            it.resourceType == "lcd"
+                        }
 
                         val layoutManager = LinearLayoutManager(this@ComputerListActivity)
                         recycler.layoutManager = layoutManager

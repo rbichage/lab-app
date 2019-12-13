@@ -6,7 +6,6 @@ import com.example.labs.models.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
-import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -23,6 +22,7 @@ interface Api {
         fun loginRequest(): Api {
             val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
+
             }
 
             val okHttpClient = OkHttpClient.Builder()
@@ -49,6 +49,7 @@ interface Api {
                     .addInterceptor(object : Interceptor {
                         override fun intercept(chain: Interceptor.Chain): Response {
                             val applicationContext = context.applicationContext
+
                             val request = chain.request()
                             val token = applicationContext.getSharedPreferences("Shared_pref", Context.MODE_PRIVATE).getString("access_token", "")
 

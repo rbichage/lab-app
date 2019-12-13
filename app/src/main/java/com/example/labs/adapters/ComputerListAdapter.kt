@@ -38,6 +38,7 @@ class ComputerListAdapter(private val context: Context, private val computerList
                     }
                     .setPositiveButton("YES"){ dialogInterface, _ ->
                         //api calls go here]
+
                         computerList.removeAt(position)
                         notifyItemRemoved(position)
                         notifyItemRangeChanged(position, computerList.size)

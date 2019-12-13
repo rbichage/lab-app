@@ -1,28 +1,20 @@
 package com.example.labs
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PatternMatcher
-import android.util.Log
 import android.util.Patterns
 import android.view.inputmethod.InputMethodManager
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import com.example.labs.api.Api
 import com.example.labs.models.AccessToken
 import com.example.labs.models.Login
 import kotlinx.android.synthetic.main.activity_main.*
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
 
@@ -63,9 +55,10 @@ class MainActivity : AppCompatActivity() {
                             when (response.code()) {
                                 200 -> {
                                     val sharedPreferences = getSharedPreferences("Shared_pref", Context.MODE_PRIVATE)
+                                    val accessToken = response.body()?.accessToken
 
                                     sharedPreferences.edit {
-                                        this.putString("access_token", response.body()!!.accessToken)
+                                        this.putString("access_token", accessToken)
                                         this.putBoolean("isLoggedIn", true)
                                         this.apply()
                                     }
@@ -75,6 +68,7 @@ class MainActivity : AppCompatActivity() {
                                 }
 
                                 else -> {
+
                                     Toast.makeText(this@MainActivity, "Check your credentials", Toast.LENGTH_SHORT).show()
                                 }
                             }
